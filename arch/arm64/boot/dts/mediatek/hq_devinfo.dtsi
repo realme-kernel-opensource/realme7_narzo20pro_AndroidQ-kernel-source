@@ -1,0 +1,26 @@
+/********************************************
+ ** Copyright (C) 2019 OPPO Mobile Comm Corp. Ltd.
+ ** ODM_HQ_EDIT
+ ** File: hq_devinfo.dtsi
+ ** Description: Source file for devinfo
+ **          To Read stage voltage
+ ** Version :1.0
+ ** Date : 2019/8/20
+ ** Author: sunjingtao@ODM_HQ.Multimedia.LCD
+ ** ---------------- Revision History: --------------------------
+ ** <version>    <date>          < author >              <desc>
+ **  1.0           2019/8/20   sunjingtao@ODM_HQ   Source file for devinfo
+ ********************************************/
+
+/ {
+	hq_devinfo:hq_devinfo {
+		compatible = "mediatek,hq_devinfo";
+	};
+};
+
+
+&hq_devinfo {
+	io-channels = <&auxadc 4>;
+    io-channel-names = "stageID-channel";
+	status = "okay";
+};

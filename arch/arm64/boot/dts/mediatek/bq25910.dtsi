@@ -1,0 +1,38 @@
+/* Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/* Please modify i2c bus number according to your platform */
+&i2c7 {
+	bq2591x@4b {
+		compatible = "ti,bq2591x";
+		reg = <0x4b>;
+		//ti,charging-disabled;
+		interrupt-parent = <&pio>;
+	    	interrupts = <19 IRQ_TYPE_EDGE_FALLING 19 0>;
+		ti,bq2591x,enable-term;
+		
+		ti,bq2591x,charge-voltage = <4400>;
+		ti,bq2591x,charge-current = <3000>;
+		ti,bq2591x,input-current-limit = <3000>;
+		ti,bq2591x,input-voltage-limit = <4500>;
+		ti,bq2591x,vbatlow-volt = <3500>;
+		ti,bq2591x,term-current = <1000>;
+
+		/*
+		 * Charger name
+		 * Main charger: primary_chg
+		 * Slave charger: secondary_chg
+		 */
+		charger_name = "secondary_chg";
+		status = "okay";
+	};
+};

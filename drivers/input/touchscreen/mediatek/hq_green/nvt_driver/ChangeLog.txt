@@ -1,0 +1,540 @@
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+52.       John PH Chen                   All                                 2019/08/19
+
+	Deciption:
+		V4.21
+			- Add trim id support for NT36672C.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+51.       John PH Chen                   All                                 2019/08/19
+
+	Deciption:
+		V4.20
+			- Print fw version in nvt_get_fw_info function.
+			- Print bld crc debug message when download fw fail (retry fail).
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+50.       John PH Chen                   All                                 2019/07/23
+
+	Deciption:
+		V4.19
+			- Add trim id and memory map support for NT36526.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+49.       John PH Chen                   All                                 2019/07/12
+
+	Deciption:
+		V4.18
+		- Protect transfer length for NVTSPI node.
+		- Modify variable from SPI_TANSFER_LENGTH to BUS_TRANSFER_LENGTH.
+		- Make HostDL driver is more like TDDI driver.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+48.       John PH Chen                   All                                 2019/06/26
+
+	Deciption:
+		V4.17
+		- Backup MP fw version to avoid print normal fw version on mp test results.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+47.       John PH Chen                   All                                 2019/06/17
+
+	Deciption:
+		V4.16
+		- Updated selftest default criteria for new ICs requested by MP team on 2019/05/20.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+46.       John PH Chen                   All                                 2019/06/12
+
+	Deciption:
+		V4.15
+		- [36xxx] Add fw point data checksum function to detect spi bus transfer error.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+45.       John PH Chen                   All                                 2019/06/12
+
+	Deciption:
+		V4.14
+		- [36xxx] If NVT_TOUCH_ESD_PROTECT is disabled. FW Protocol-B with 0x77 handshake will
+			lead to touch driver send finger break event.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+44.       John PH Chen                   All                                 2019/05/29
+
+	Deciption:
+		V4.13
+		- Increase nvt_polling_hand_shake_status() polling retry to 70 (i.e. 700ms) to avoid
+			sometimes short test timeout.
+			e.g. 525B Long V mode short test 33 frames taking 33x16.6ms = 547.8ms which may
+				exceed original 50x10ms polling.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+43.       John PH Chen                   All                                 2019/05/02
+
+	Deciption:
+		V4.12
+		- [36xxx] Copy xbuf with (len+DUMMY_BYTES) length for NVT SPI protocol.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+42.       John PH Chen                   All                                 2019/04/17
+
+	Deciption:
+		V4.11
+		- Changed dynamically check FW need write size by end flag "NVT" & "MOD" in FW binary for boot FW update.
+		- Changed default criteria for selftest test data sampling provided by MP team.
+		- Fix kernel DMA buffer issuze for xbuf.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+41.       John PH Chen                   All                                 2019/04/12
+
+	Deciption:
+		V4.10
+		-  Add support for NT36675.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+40.       John PH Chen                   All                                 2019/03/12
+
+	Deciption:
+		V4.09
+		- Remove NT36870 support.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+39.       John PH Chen                   All                                 2019/01/03
+
+	Deciption:
+		V4.08
+		- Add trim id and memory map support for NT36672B and NT36682B.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+38.       John PH Chen                   All                                 2019/01/03
+
+	Deciption:
+		V4.07
+		- Remove IRQF_NO_SUSPEND flag in request irq to avoid irq handler nvt_ts_work_func()
+			execute before bus ready when gesture wakeup resume from deep sleep.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+37.       John PH Chen                   All                                 2018/12/18
+
+	Description:
+		V4.06
+		- Move disable irq out of mutex lock section in nvt_ts_suspend() to fix dead lock bug which
+			when no gesture mode enter nvt_ts_suspend() after held mutex lock then get interrupt,
+			and then nvt_ts_work_func() wait mutex lock and unable to finish interrupt, while in
+			nvt_ts_suspend() disable_irq() will stuck in synchronize_irq() wait all pending
+			interrupt to be finished, hence lead to dead lock finally.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+36.       John PH Chen                   All                                 2018/12/07
+
+	Description:
+		V4.05
+		- Fix kernel crash issue caused by ESD protect.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+35.       John PH Chen                   All                                 2018/11/22
+
+	Description:
+		V4.04
+		- Remove spin lock in nvt_irq_enable to avoid bug on panic due to new version kernel add
+			might_sleep() in wait_event() called by disable_irq().
+		- Change to check CONFIG_DRM_MSM while not _MSM_DRM_NOTIFY_H_ to include
+			<linux/msm_drm_notify.h> due to _MSM_DRM_NOTIFY_H_ is defined in msm_drm_notify.h and will
+			never be included.
+		- Improve resume time. Ignore check fw status if download fw fail.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+34.       John PH Chen                   All                                 2018/11/16
+
+	Description:
+		V4.03
+		- Fix point_data buffer size.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+33.       John PH Chen                   All                                 2018/10/17
+
+	Description:
+		V4.02
+		- Add trim id and memory map support for NT36525B HostDL.
+		- Fix HostDL log "spi" typo.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+32.       John PH Chen                   All                                 2018/09/25
+
+	Description:
+		V4.01
+		- Use usleep_range to replace usleep. It's may lead to build fail, because usleep is not
+		existed in partial codebase.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+31.       John PH Chen                   All                                 2018/09/21
+
+	Description:
+		V4.0
+		- Use nvt_ts_hw_info to assign each hw info when chip id is detected.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+30.       John PH Chen                   All                                 2018/09/21
+
+	Description:
+		V3.9
+		- Fix msleep wait too long issue. By linux kernel driver, msleep is implemented by jiffies 
+		and HZ=100 (jiffies = 1/HZ = 10ms) on most embedded platform. The lower bound of msleep is
+		20ms even if setting is lower than 20ms.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+29.       John PH Chen                   All                                 2018/09/17
+
+	Description:
+		V3.8
+		- Use DTSI property novatek,spi-rd-fast-addr to disable SPI_RD_FAST function
+		- Set default transfer length as 128K.
+		- For TX DMA transfer, NVTSPI buffer should be 4Byte alignemt.
+		- MTK platform compatible
+			- Use CONFIG_MTK_SPI & CONFIG_SPI_MT65XX to distinguish mtk new API.
+			- #include <linux/platform_data/spi-mt65xx.h>
+			- #include "mt_spi.h" and add comment to notice it should be copy from mtk driver folder
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+28.       John PH Chen                   All                                 2018/09/17
+
+	Description:
+		V3.7
+		- Sync to TDDI V2.43
+			- Removed wakelock and use wake up source and event instead for new kernel change.
+			- Changed uaccess.h include path for new kernel change.
+			- Changed i2c transfer buffer to be DMA valid area memory by kmalloc for new kernel
+				change.
+			- Changed API usage of request_irq to request_threaded_irq, create_workqueue and
+				create_singlethread_workqueue to alloc_workqueue for new kernel change.
+			- Add IRQ enable/disable balance protection function.
+			- Add and fix resources release in the end of driver probe, remove and shutdown
+				functions.
+			- Add MSM DRM notification to run touch suspend/resume functions for new QCT platform
+				with new kernel.
+			- Removed esd_retry_max due to tools from NVTflash already will stop the esd check
+				workqueue.
+			- Updated the copyright period of each source code file.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+27.       John PH Chen                   All                                 2018/08/14
+
+	Description:
+		V3.6
+		- change dtsi comment of novatek,swrst-n8-addr
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+26.       John PH Chen                   All                                 2018/08/03
+
+	Description:
+		V3.5
+		- Combine host download driver code to support all NT36xxx series
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+25.       John PH Chen                   All                                 2018/08/01
+
+	Description:
+		V3.4
+		- Use mutex to protect spi read/write function. Avoid rbuf be overwritten issue.
+		- Stopping esd protect when device reboot and shutdown. Add nvt_ts_shutdown() to
+			unregister work and queue 
+		- Add nvt_write_sram() for general usage.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+24.       John PH Chen                   All                                 2018/06/26
+
+	Description:
+		V3.3
+		- Sync to TDDI I2C driver V2.40.
+		- Reduce retry times if check fw status is RESET_STATE_INIT. Avoid to check too much time
+			when download fw fail.
+		- Detect 0xFD pattern for nvt_wdt_fw_recovery().
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+23.       John PH Chen                   All                                 2018/06/06
+
+	Description:
+		V3.2
+		- [672A] Update 672A HostDL to support MTK new SPI API.
+		- [672A] Move enable/disable esd check flag assignment in the end of nvt_esd_check_enable() to avoid in
+			case that when resume esd check flag have been enabled but irq_timer havn't been updated and
+			nvt_esd_check_func() thread run to meet the conditions to do esd recovery bootloader reset unexpectedly.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+22.       John PH Chen                   All                                 2018/05/17
+
+	Description:
+		V3.1
+			- Move rbuf to "struct nvt_ts_data".
+			- Rename NVT_DUMP_PARTITION from NVT_DUMP_SRAM
+			- Use error code to replace -1 magic number
+			- Protect bin_map memory free
+			- Use nvt_dump_partition & nvt_read_ram_and_save_file to debug firmware download.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+21.       John PH Chen                   All                                 2018/05/08
+
+	Description:
+		V3.0
+			- Remove 672/525 eng reset address from dtsi
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+20.       John PH Chen                   All                                 2018/05/03
+
+	Description:
+		V2.9
+			- Use mutex to protect FW update workqueue. Avoid update process be interrupted by WDT.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+19.       John PH Chen                   All                                 2018/05/02
+
+	Description:
+		V2.8
+			- Use mutex to protect FW update process.
+			- Sync to TDDI I2C driver V2.37.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+18.       John PH Chen                   All                                 2018/05/02
+
+	Description:
+		V2.7
+			- Enhance FW recovery mechanism with INT+0x77 package & WDT timeout at the same time.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+17.       John PH Chen                   All                                 2018/04/12
+
+	Description:
+		V2.6
+			- Update ESD recovery mechanism with INT and 0x77 package.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+16.       John PH Chen                   All                                 2018/02/08
+
+	Description:
+		V2.5
+			- Sync to TDDI I2C driver V2.34.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+15.       John PH Chen                   All                                 2018/01/24
+
+	Description:
+		V2.4
+			- Download fw without work queue.
+			- Add recovery fw log to know reset cause is 0xFE (WDT Timeout) or 0xFD (FW ESD reset).
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+14.       John PH Chen                   All                                 2018/01/06
+
+	Description:
+		V2.3
+			- Remove 672 host download without hw crc function.
+			- Tuning download flow to match fw flow.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+13.       John PH Chen                   All                                 2017/12/22
+
+	Description:
+		V2.2
+			- Sync to TDDI I2C driver V2.32.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+12.       John PH Chen                   NT36672A                            2017/12/13
+
+	Description:
+		V2.1
+			- Tuning 672A HW CRC check flow to speed up write fw.
+			- Fix bug for read too much package.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+11.       John PH Chen                   NT36672A                            2017/12/07
+
+	Description:
+		V2.0
+			- Modify 672A HW CRC check flow.
+			- Modify 672A SWRST_N8_ADDR to 0x3F0FE.
+			- Fix partition "header" HW_CRC check bug.
+			- Enable BLD_CRC_EN to compatible all module (Some modules are BLD CRC function disabled).
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+10.       John PH Chen                   NT36672                             2017/12/06
+
+	Description:
+		V1.9
+			- Support Doze 1D test and LPWG rawdata test
+			- Fix HW_CRC check bug.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+9.        John PH Chen                   NT36672                             2017/11/28
+
+	Description:
+		V1.8
+			- Fix dump SRAM lead to kernel crash issue.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+8.        John PH Chen                   NT36672                             2017/11/23
+
+	Description:
+		V1.7
+			- Verify driver on mtk platform and backup.
+			- Change node name from NVTflash to NVTSPI.
+			- Sync to nt36xxx i2c touch driver V2.27
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+7.        John PH Chen                   NT36672                             2017/10/25
+
+	Description:
+		V1.6
+			- Update mp selftest criteria for BOE599.
+			- Sync to nt36xxx i2c touch driver V2.24
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+6.        John PH Chen                   NT36672                             2017/09/11
+
+	Description:
+		V1.5
+			- Enable nvt_fw_recovery() function to detect 0xFD and 0xFE special command for fw recovery.
+			
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+5.        John PH Chen                   NT36672                             2017/08/31
+
+	Description:
+		V1.4
+			- Use "static" to protect kernel.
+			- Remove update debug message.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+4.        John PH Chen                   NT36672                             2017/08/29
+
+	Description:
+		V1.3
+			- Auto detect "support_hw_crc" flag by read trim id.
+			- Use mmap to assign correct register table for HW CRC function.
+			- Add function "nvt_set_bld_crc()" to fill up CRC register bank.
+			- Read back and print CRC result if check CRC flag fail.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+3.        John PH Chen                   NT36672                             2017/08/25
+
+	Description:
+		V1.2
+			- Verify and modify the function Download_Firmware_HW_CRC() with 672A FPGA.
+			- Add host download spi dsti to parse specify register address.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+2.        John PH Chen                   NT36672                             2017/08/24
+
+	Description:
+		V1.1
+			- Update checksum formula for header "size" definition.
+			- Retry when request firmware fial or header parser fail.
+
+---------------------------------------------------------------------------------------------------
+ID        Author                         Module                              Date
+---------------------------------------------------------------------------------------------------
+1.        John PH Chen                   NT36672                             2017/08/16
+
+	Description:
+		V1.0
+			- Backup hostdownload spi touch driver

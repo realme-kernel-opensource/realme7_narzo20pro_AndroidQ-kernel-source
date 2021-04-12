@@ -1,0 +1,13 @@
+##ifdef ODM_HQ_EDIT
+## zuoqiquan@ODM.BSP.Sensor  2019/09/06 bring up nfc 
+
+config NFC_CHIP_PN553
+	tristate "NFC driver solution - NXP PN553 NFC Controller Driver"
+	default n
+	depends on I2C
+	help
+	  NXP PN553 Near Field Communication controller support.
+	  If configures to be y, means devices supports NFC functionality.
+	  If configures to be n, means devices doesn't support NFC functionality.
+
+##endif /*ODM_HQ_EDIT*/

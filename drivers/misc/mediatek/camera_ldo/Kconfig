@@ -1,0 +1,8 @@
+
+config HQ_CAMERA_LDO
+	bool CONFIG_HQ_CAMERA_LDO
+	default n
+	help
+	  HQ CAMERA LDO driver
+
+

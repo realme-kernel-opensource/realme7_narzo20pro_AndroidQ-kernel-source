@@ -1,0 +1,63 @@
+config TOUCHSCREEN_MTK_HIMAX_CHIPSET_SPI
+	bool "Himax SPI support"
+	default n
+	help
+	  Say Y here if you have NT36xxx touch panel.
+
+	  If unsure, say N.
+
+	  To compile this dirver as a module, choose M here: the
+	  module will be called.
+
+config TOUCHSCREEN_MTK_NT36xxx_HOSTDL_SPI
+	bool "Himax SPI support"
+	default n
+	help
+	  Say Y here if you have NT36xxx touch panel.
+
+	  If unsure, say N.
+
+	  To compile this dirver as a module, choose M here: the
+	  module will be called.
+ 
+#if TOUCHSCREEN_MTK_HIMAX_CHIPSET_SPI
+source "drivers/input/touchscreen/mediatek/hq_green/hxchipset/Kconfig"
+#endif
+ 
+#if TOUCHSCREEN_MTK_NT36xxx_HOSTDL_SPI
+source "drivers/input/touchscreen/mediatek/hq_green/nvt_driver/Kconfig"
+#endif
+
+# ifdef ODM_HQ_EDIT
+# liunianliang@ODM.BSP.TP 2020/02/17, Add for oppo6771 Tp driver.
+config TOUCHSCREEN_ILI9881H
+	bool "ILI9881H support"
+	default n
+	help
+	  Say Y here if you have ILI9881H touch panel.
+
+	  If unsure, say N.
+
+	  To compile this dirver as a module, choose M here: the
+	  module will be called.
+
+config TOUCHSCREEN_NT36525
+	bool "NT36xxx SPI support"
+	default n
+	help
+	  Say Y here if you have NT36xxx touch panel.
+
+	  If unsure, say N.
+
+	  To compile this dirver as a module, choose M here: the
+	  module will be called.
+
+#if TOUCHSCREEN_ILI9881H
+source "drivers/input/touchscreen/mediatek/hq_green/ipio_touch_driver-v1.0.3.8/Kconfig"
+#endif
+
+#if TOUCHSCREEN_NT36525
+source "drivers/input/touchscreen/mediatek/hq_green/nt36525/Kconfig"
+#endif
+
+#endif

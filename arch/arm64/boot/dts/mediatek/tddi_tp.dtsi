@@ -1,0 +1,50 @@
+/* Benshan.Cheng@ODM.bsp.tp  2018/08/12 modify for bring up TP start */
+&spi3 {
+	tddi_tp@0 {
+                compatible = "tchip,tp";
+		reg = <0>;
+		chip-name_nvt = "NT36672C_NF";
+		status = "ok";
+
+		spi-max-frequency = <15000000>; //4800000,9600000,15000000,19200000
+		reset-gpio = <&pio 2 0>;
+		interrupt-parent = <&pio>;
+		interrupts = <0 IRQ_TYPE_EDGE_FALLING 0 0>; //1 IRQ_TYPE_EDGE_FALLING 1 0
+		irq-gpio = <&pio 1 0>;
+              //  lcd-reset-gpio = <&pio 44 0>;
+		touchpanel,tx-rx-num = <16 36>;
+		touchpanel,max-num-support = <10>;
+		touchpanel,panel-coords = <1080 2400>;
+		touchpanel,display-coords = <1080 2400>;
+		touchpanel,touchmajor-limit = <0 54>;
+/*
+		pinctrl-names ="active","suspend";
+		pinctrl-0 = <&ts_int_active &ts_reset_active>;
+		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+		pinctrl-names = "int_active","reset_active","int_suspend","reset_suspend";
+		pinctrl-0 = <&ts_int_active>;
+		pinctrl-1 = <&ts_reset_active>;
+		pinctrl-2 = <&ts_int_suspend>;
+		pinctrl-3 = <&ts_reset_suspend>;
+*/
+		incell_screen;
+		fw_edge_limit_support;
+		black_gesture_support;
+		charger_pump_support;
+		headset_pump_support;
+		esd_handle_support;
+		//spurious_fingerprint_support;
+		//lcd_trigger_fp_check;
+		black_gesture_test_support;
+		noflash_support;
+		smart_gesture_support;
+		pressure_report_support;
+		fw_update_app_support;
+		game_switch_support;
+		drlimit_remove_support;
+		lcd_trigger_load_tp_fw_support;
+		fw_update_in_probe_with_headfile;
+		touchpanel,button-type = <4>;
+	};
+};
+/* Benshan.Cheng@ODM.bsp.tp  2018/08/12 modify for bring up TP end */
